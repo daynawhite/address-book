@@ -88,8 +88,12 @@ const displayPost = () => {
     const allPosts = document.getElementById('all-posts')
     posts.map((post, index) => {
       const li = document.createElement('li')
-      console.log(`#${index}, Name: ${post}`)
-      const text = document.createTextNode(`#${index}, Name: ${post}`)
+      const img = document.createElement('img')
+      img.src = post.picture.medium
+      li.appendChild(img)
+    //   console.log(`#${index}, Name: ${post}`)
+      const text = document.createElement('p')
+      text.innerHTML = `Name: ${post.name.first} ${post.name.last}`
       li.appendChild(text)
       allPosts.append(li)
     })
