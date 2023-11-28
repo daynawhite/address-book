@@ -7,144 +7,73 @@
 // Once you have the functionality working, feel free to style and structure your address book with CSS and HTML
 
 
-
-// let posts = [
-//     {
-//         gender: 'male',
-//         name: [Object],
-//         location: [Object],
-//         email: 'iker.diez@example.com',
-//         login: [Object],
-//         dob: [Object],
-//         registered: [Object],
-//         phone: '984-733-931',
-//         cell: '698-473-067',
-//         id: [Object],
-//         picture: [Object],
-//         nat: 'ES'
-//       },
-//       {
-//         gender: 'female',
-//         name: [Object],
-//         location: [Object],
-//         email: 'antoinette.speck@example.com',
-//         login: [Object],
-//         dob: [Object],
-//         registered: [Object],
-//         phone: '0197-1512243',
-//         cell: '0174-7041119',
-//         id: [Object],
-//         picture: [Object],
-//         nat: 'DE'
-//       },
-//       {
-//         gender: 'female',
-//         name: [Object],
-//         location: [Object],
-//         email: 'judith.delacruz@example.com',
-//         login: [Object],
-//         dob: [Object],
-//         registered: [Object],
-//         phone: '(632) 252 0119',
-//         cell: '(620) 976 6636',
-//         id: [Object],
-//         picture: [Object],
-//         nat: 'MX'
-//       },
-//       {
-//         gender: 'male',
-//         name: [Object],
-//         location: [Object],
-//         email: 'mikola.rezanenko@example.com',
-//         login: [Object],
-//         dob: [Object],
-//         registered: [Object],
-//         phone: '(097) G91-6217',
-//         cell: '(066) O86-8048',
-//         id: [Object],
-//         picture: [Object],
-//         nat: 'UA'
-//       },
-//       {
-//         gender: 'female',
-//         name: [Object],
-//         location: [Object],
-//         email: 'carolina.pascual@example.com',
-//         login: [Object],
-//         dob: [Object],
-//         registered: [Object],
-//         phone: '917-919-240',
-//         cell: '696-955-759',
-//         id: [Object],
-//         picture: [Object],
-//         nat: 'ES'
-//       }
-// ]
-
-// let posts = []
-// let posts
-
+       // function that will reveal additional information from the API
+    //    const buttonFunction = () => {
+        // if (div.style.display === "none") {
+        //     div.style.display = "block";
+        // } else {
+        //     div.style.display = "none"
+        // }
+    // }
+    
 const displayPost = () => {
+  
     const allPosts = document.getElementById('all-posts')
-    posts.map((post, index) => {
-      const li = document.createElement('li')
-      const img = document.createElement('img')
-      img.src = post.picture.medium
-      li.appendChild(img)
-    //   console.log(`#${index}, Name: ${post}`)
-      const text = document.createElement('p')
-      text.innerHTML = `Name: ${post.name.first} ${post.name.last}`
-      li.appendChild(text)
-      allPosts.append(li)
-    })
-  }
+    posts.map((post) => {
+      const li = document.createElement('li');
+    //   create and add a list item containing the picture from API
+      const img = document.createElement('img');
+      img.src = post.picture.large;
+      li.appendChild(img);
+    //   create and add a list item containing first and last name from API
+      const text = document.createElement('p');
+      text.innerHTML = `Name: ${post.name.first} ${post.name.last}`;
+      li.appendChild(text);
+      allPosts.append(li);
+    //   add a button that will reveal additional information when clicked:
+      const button = document.createElement('button');
+      button.innerHTML = 'More';
+    //   button.onclick = "buttonFunction()";
+
+    const div = document.createElement('div');
+    const email = document.createElement('p');
+    email.innerHTML = `Email: ${post.email}`;
+    const cell = document.createElement('p');
+    cell.innerHTML = `Cell: ${post.cell}`;
+    div.appendChild(email);
+    div.appendChild(cell);
+    li.appendChild(div)
+      
+      div.style.display = "none"
+
+    button.onclick = () => {
+        // li.append(div)
+        // allPosts.append(div)
+        // div.style.display = "block"}
+      
+      if (div.style.display === "none") {
+        div.style.display = "block";
+        button.innerHTML = 'Less'
+    } else {
+        div.style.display = "none"
+        button.innerHTML = 'More'
+    }
+
+       
+    }
+        // button.onclick = appear()
+        li.appendChild(button);
+
+    //   button.onclick = buttonFunction()
+})
+}
 
 window.onload = async function getPosts() {
-    const response = await fetch('https://randomuser.me/api/?results=5');
+    const response = await fetch('https://randomuser.me/api/?results=10');
     rawPosts = await response.json();
     posts = rawPosts.results
     console.log(posts)
     displayPost()
 }
 
-    // fetch('https://randomuser.me/api/?results=5')
-    // .then(res => res.json())
-    // .then(data => console.log(data))
-    // .then(data => {
-    //     posts = data;
-    //     console.log("posts array: " + posts)
-    // })
-
-// window.onload = function() {
-//     fetch('https://randomuser.me/api/?results=5')
-//     .then(res => res.json())
-//     .then(data => console.log(data))
-//     .then(data => {
-//         posts = data;
-//         console.log(posts)
-//     })
-// }
-
-
-
-
-
-// namePicArray = posts.reduce(
-//     (acc, current) => {
-//         console.log(`result: ${acc}`);
-//         console.log(`current: ${current}`);
-//         acc.push(current.name, current.pic);
-//         return acc;
-//     },
-//     []
-// )
-// console.log('new array: ' + namePicArray)
-
-// let listElement = '<ul>'
-// namePicArray.forEach((namePic) => {
-//     listElement + '<li>' + namePic + '</li'
-// })
-
-// listElement += '</ul>'
-// document.getElementById("picsAndNames").innerHTML = listElement
   
